@@ -1,5 +1,5 @@
-train: ./nyc_landmarks/train
-val: ./nyc_landmarks/valid
+train: ./datasets/nyc_landmarks/train
+val: ./datasets/nyc_landmarks/valid
 
 # classes
 names:
