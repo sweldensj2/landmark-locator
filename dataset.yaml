@@ -1,0 +1,15 @@
+train: ./nyc_landmarks/train
+val: ./nyc_landmarks/valid
+
+# classes
+names:
+  0: EmpireState
+  1: WTC
+  2: 432ParkAve
+  3: UNBuilding
+  4: Flatiron
+  5: BrooklynBridge
+  6: ChryslerBuilding
+  7: MetlifeBuilding
+  8: StatueOfLiberty
+  9: 30HudsonYards
