@@ -12,6 +12,7 @@ import random
 import uuid
 import io
 import IPython
+import time
 
 
 
@@ -52,6 +53,9 @@ model = RTDETR(weights_path)
 # intialize webcam
 cam = cv2.VideoCapture(0)  # 0 is the webcam index
 
+conf = 0.85 # gotta be 85% sure, its one of the buildings
+visualize = False
+
 try:
     while True:
         # Read frame from video stream
@@ -64,9 +68,9 @@ try:
         cv2.imshow("Webcam", frame)
 
         # Make a prediction
-        
-        prediction = model(image, conf = conf, visualize = visualize)[0]
-
+        start_time = time.time()
+        prediction = model(frame, conf = conf, visualize = visualize)[0]
+        print("model_time", str(time.time() - start_time))
         # Check for key press to interrupt the loop
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):  # Press 'q' to exit
