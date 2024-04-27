@@ -101,7 +101,8 @@ try:
         ret, frame = cam.read()
         if not ret:
             print("Failed to grab frame")
-            break
+            # break
+            continue
 
         
 
