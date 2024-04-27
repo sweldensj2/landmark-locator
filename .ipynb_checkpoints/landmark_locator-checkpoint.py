@@ -19,7 +19,6 @@ import time
 
 from utils.pretrained_deployment import download_images, download_images2, download_images_with_resize, download_images_full_size
 from utils.display import *
-from utils.make_dataset_nyc_landmarks import make_nyc_dataset
 
 # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -44,17 +43,21 @@ weights_path = '/Users/johansweldens/Documents/EECS6692.DLoE/final_project/e6692
 # Load trained weights
 model = RTDETR(weights_path)
 
+# CV2 or Predict variables
+conf = 0.85 # gotta be 85% sure, its one of the buildings
+visualize = False
+max_num_buildings = 11 #literally impossible to see more than the 10 (+1) objects lmao
+half_precision_inf = False
 
-
-
+color = (255, 0, 0) 
+thickness = 2
 
 
 
 # intialize webcam
 cam = cv2.VideoCapture(0)  # 0 is the webcam index
 
-conf = 0.85 # gotta be 85% sure, its one of the buildings
-visualize = False
+
 
 try:
     while True:
@@ -64,13 +67,35 @@ try:
             print("Failed to grab frame")
             break
 
-        # Display the frame
-        cv2.imshow("Webcam", frame)
+        
 
         # Make a prediction
         start_time = time.time()
-        prediction = model(frame, conf = conf, visualize = visualize, device='mps')[0]
+        prediction = model(frame, conf = conf, visualize = visualize, device='mps', max_det = max_num_buildings, half = half_precision_inf)[0]
         print("model_time", str(time.time() - start_time))
+
+        process_start = time.time()
+        # Draw the boxes
+        for box in prediction.boxes:
+            print("box", box.shape, type(box))
+            # Blue color in BGR 
+            xyxy = box.xyxy.squeeze()
+            start_point = (int(xyxy[0]), int(xyxy[1]))
+            end_point = (int(xyxy[2]), int(xyxy[3]))
+            print("start_point", start_point)
+            print("end_point", end_point)
+  
+            # Using cv2.rectangle() method 
+            # Draw a rectangle with blue line borders of thickness of 2 px 
+            frame = cv2.rectangle(frame, start_point, end_point, color, thickness) 
+
+
+        print("process_time", str(time.time() - process_start))
+        # Display the frame
+        cv2.imshow("Webcam", frame)
+
+
+        
         # Check for key press to interrupt the loop
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):  # Press 'q' to exit
