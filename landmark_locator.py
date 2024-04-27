@@ -82,8 +82,11 @@ try:
             xyxy = box.xyxy.squeeze()
             start_point = (int(xyxy[0]), int(xyxy[1]))
             end_point = (int(xyxy[2]), int(xyxy[3]))
-            print("start_point", start_point)
-            print("end_point", end_point)
+            
+            item_conf = box.conf.squeeze().cpu().numpy()
+            item_cls = box.cls.squeeze().cpu().numpy()
+            item_name = classes[int(item_cls)]
+            print("Item", item_name, "Item_conf", item_conf)
   
             # Draw a rectangle with blue line borders of thickness of 2 px 
             frame = cv2.rectangle(frame, start_point, end_point, color, thickness) 
