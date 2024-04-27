@@ -107,7 +107,7 @@ try:
 
         # Make a prediction
         start_time = time.time()
-        prediction = model(frame, conf = conf, visualize = visualize, device='mps', max_det = max_num_buildings, half = half_precision_inf)[0]
+        prediction = model(frame, conf = conf, visualize = visualize, device='mps', max_det = max_num_buildings, half = half_precision_inf, verbose = False)[0]
         print("model_time", str(time.time() - start_time))
 
         process_start = time.time()
