@@ -21,7 +21,7 @@ from utils.pretrained_deployment import download_images, download_images2, downl
 from utils.display import *
 from utils.make_dataset_nyc_landmarks import make_nyc_dataset
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 ##### Initliaze Model
@@ -69,7 +69,7 @@ try:
 
         # Make a prediction
         start_time = time.time()
-        prediction = model(frame, conf = conf, visualize = visualize)[0]
+        prediction = model(frame, conf = conf, visualize = visualize, device='mps')[0]
         print("model_time", str(time.time() - start_time))
         # Check for key press to interrupt the loop
         key = cv2.waitKey(1) & 0xFF
