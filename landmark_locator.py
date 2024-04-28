@@ -13,6 +13,7 @@ import uuid
 import io
 import IPython
 import time
+import sys
 
 
 
@@ -64,32 +65,40 @@ class_colors = {
 }
 
 
-# local
-mode = "nano" #yolo8n
+# mode = "nano" #yolo8n
 # mode = "detr" #rt-detr
+# mode = "yolo" # yolo8l
+mode = sys.argv[1]
 
 if(mode == "detr"):
     print("Loading RT-DETR Model")
-    weights_path = './runs/detect/detr/weights/best.pt'
+    weights_path = './runs/detect/detr_e50/weights/best.pt'
     # Load trained weights
     model = RTDETR(weights_path)
 elif(mode == "nano"):
     print("Loading Yolo8n")
-    weights_path = './runs/detect/yolo9n/weights/best.pt'
+    weights_path = './runs/detect/yolo8n_e50/weights/best.pt'
+    # Load trained weights
+    model = YOLO(weights_path)
+elif(mode == "yolo"):
+    print("Loading Yolo8l")
+    weights_path = './runs/detect/yolo8l_e50/weights/best.pt'
     # Load trained weights
     model = YOLO(weights_path)
 
 
 
 
-
 # CV2 or Predict variables
-conf = 0.2 # gotta be 85% sure, its one of the buildings
+conf = 0.7 # gotta be 85% sure, its one of the buildings
 visualize = False
 max_num_buildings = 11 #literally impossible to see more than the 10 (+1) objects lmao
 half_precision_inf = False
-
 box_thickness = 6
+log_time = True
+total_process_time = 0
+total_model_time = 0
+count = 0
 
 # font 
 font = cv2.FONT_HERSHEY_SIMPLEX 
@@ -120,7 +129,9 @@ try:
         model_time = time.time()
         prediction = model(frame, conf = conf, visualize = visualize, device='mps', max_det = max_num_buildings, half = half_precision_inf, verbose = False)[0]
         model_time = time.time() - model_time
-        print("model_time", model_time)
+        total_model_time +=  model_time
+        
+        # print("model_time", model_time)
 
         process_time = time.time()
         # Draw the boxes
@@ -142,19 +153,25 @@ try:
 
             # Add class name next to box
             text_to_add = item_name + ", " + str(item_conf)
-            org = start_point
+            org = (start_point[0] - 75, start_point[1]-15)
             frame = cv2.putText(frame, text_to_add, org, font, fontScale, color, text_thickness, cv2.LINE_AA) 
 
         process_time = time.time() - process_time
-        print("process_time", process_time)
+        total_process_time += process_time
+        # print("process_time", process_time)
         # Display the frame
         cv2.imshow("Webcam", frame)
+        count += 1
 
 
         
         # Check for key press to interrupt the loop
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):  # Press 'q' to exit
+            total_process_time = total_process_time / count
+            total_model_time = total_model_time / count
+            print("Average Model Time:", total_model_time)
+            print("Average Process Time:", total_process_time)
             break
 finally:
     # Release the camera feed
