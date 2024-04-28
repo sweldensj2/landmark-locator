@@ -122,6 +122,7 @@ try:
         print("model_time", str(time.time() - start_time))
 
         process_start = time.time()
+        print("prediction.boxes", prediction.boxes)
         # Draw the boxes
         for box in prediction.boxes:
             print("box", box.shape, type(box))
@@ -132,6 +133,7 @@ try:
             
             item_conf = box.conf.squeeze().cpu().numpy()
             item_cls = box.cls.squeeze().cpu().numpy()
+            print("item_cls", item_cls)
             item_name = classes_big[int(item_cls)]
   
             # Draw a rectangle with blue line borders of thickness of 2 px 
