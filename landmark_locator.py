@@ -5,7 +5,7 @@ import numpy as np
 from IPython.display import Video, display, clear_output
 import time
 import torch
-from ultralytics import RTDETR
+from ultralytics import RTDETR, YOLO
 import torchvision.transforms as T
 from PIL import Image
 import random
@@ -65,13 +65,23 @@ class_colors = {
 
 
 # local
-# weights_path = '/Users/johansweldens/Documents/EECS6692.DLoE/final_project/e6692-2024spring-finalproject-jwss-jws2215/runs/detect/detr/weights/best.pt'
-weights_path = './runs/detect/detr/weights/best.pt'
+mode = "nano" #yolo8n
+# mode = "detr" #rt-detr
+
+if(mode == "detr"):
+    print("Loading RT-DETR Model")
+    weights_path = './runs/detect/detr/weights/best.pt'
+    # Load trained weights
+    model = RTDETR(weights_path)
+elif(mode == "nano"):
+    print("Loading Yolo8n")
+    weights_path = './runs/detect/detr/weights/best.pt'
+    # Load trained weights
+    model = YOLO(weights_path)
 
 
 
-# Load trained weights
-model = RTDETR(weights_path)
+
 
 # CV2 or Predict variables
 conf = 0.7 # gotta be 85% sure, its one of the buildings
