@@ -75,7 +75,7 @@ if(mode == "detr"):
     model = RTDETR(weights_path)
 elif(mode == "nano"):
     print("Loading Yolo8n")
-    weights_path = './runs/detect/detr/weights/best.pt'
+    weights_path = './runs/detect/yolo9n/weights/best.pt'
     # Load trained weights
     model = YOLO(weights_path)
 
@@ -84,7 +84,7 @@ elif(mode == "nano"):
 
 
 # CV2 or Predict variables
-conf = 0.7 # gotta be 85% sure, its one of the buildings
+conf = 0.2 # gotta be 85% sure, its one of the buildings
 visualize = False
 max_num_buildings = 11 #literally impossible to see more than the 10 (+1) objects lmao
 half_precision_inf = False
@@ -117,15 +117,14 @@ try:
         
 
         # Make a prediction
-        start_time = time.time()
+        model_time = time.time()
         prediction = model(frame, conf = conf, visualize = visualize, device='mps', max_det = max_num_buildings, half = half_precision_inf, verbose = False)[0]
-        print("model_time", str(time.time() - start_time))
+        model_time = time.time() - model_time
+        print("model_time", model_time)
 
-        process_start = time.time()
-        print("prediction.boxes", prediction.boxes)
+        process_time = time.time()
         # Draw the boxes
         for box in prediction.boxes:
-            print("box", box.shape, type(box))
             # Blue color in BGR 
             xyxy = box.xyxy.squeeze()
             start_point = (int(xyxy[0]), int(xyxy[1]))
@@ -133,7 +132,8 @@ try:
             
             item_conf = box.conf.squeeze().cpu().numpy()
             item_cls = box.cls.squeeze().cpu().numpy()
-            print("item_cls", item_cls)
+
+            
             item_name = classes_big[int(item_cls)]
   
             # Draw a rectangle with blue line borders of thickness of 2 px 
@@ -145,8 +145,8 @@ try:
             org = start_point
             frame = cv2.putText(frame, text_to_add, org, font, fontScale, color, text_thickness, cv2.LINE_AA) 
 
-
-        print("process_time", str(time.time() - process_start))
+        process_time = time.time() - process_time
+        print("process_time", process_time)
         # Display the frame
         cv2.imshow("Webcam", frame)
 
