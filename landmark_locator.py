@@ -87,6 +87,8 @@ class_websites = {
 }
 
 
+
+
 # Read in the mode selection
 mode = sys.argv[1]
 
@@ -97,12 +99,12 @@ if(mode == "detr"):
     model = RTDETR(weights_path)
 elif(mode == "nano"):
     print("Loading Yolo8n")
-    weights_path = './runs/detect/yolo8n_e50/weights/best.pt'
+    weights_path = './runs/detect/yolo8n_e100/weights/best.pt'
     # Load trained weights
     model = YOLO(weights_path)
 elif(mode == "yolo"):
     print("Loading Yolo8l")
-    weights_path = './runs/detect/yolo8l_e50/weights/best.pt'
+    weights_path = './runs/detect/yolo8l_e100/weights/best.pt'
     # Load trained weights
     model = YOLO(weights_path)
 
