@@ -1,28 +1,35 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/UHGdSN-p)
 # E6692 Spring 2024: Final Project
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/ifbeTrPr)
+# e6691-2024Spring-project Project Files and Folders Overview
 
-The description of the final project for e6692 2024 spring is provided in [the Google drive](https://docs.google.com/document/d/1o4E8MksTKACW7tfuazcWeNCaSGLv9YKAd7A5lqFmzkA/edit?usp=sharing)
+## Legacy Code
+- **Description**: Contains code from the old repository, mainly the display_data.ipynb which was an initiail effort. It used a smaller 3 channel RGB 2D dataset, but it demonstrated the feasiliblty of the project. 
 
-This repo is an (empty) template which is distributed to students as a part of the Github classroom assignment process.
+## Results
+- **Description**: Folder containing uploaded results. The folder contains videos of prediction overlays of patients 10 and 15, the output data for MATLAB to process, and it contains images of the 3D visualizations from MATLAB of both patients 10 and 15. 
 
-The repository (assigned by the Github Classroom) will become (after students accept the github classroom link invite) the repository for all project contents.
+## data_inspection.ipynb
+- **Description**: Notebook starting the dataset inspection. This file loads essential packages, defines paths, inspects data samples, and processes them into correct folders for training and validation. Additionally, it displays random 2D slices from each image type and prints unique values for segmentation and image modalities.
 
-## How to modify this README.md file
-Students need to maintain this repo to have a "professional look":
-* Remove the instructions (this text)
-* Provide description of the topic/project
-* Provide organization of this repo 
-* Add all relevant links: name of Google docs and link to them, links to public repos used, etc.
-* For paper reviews it should include the organization of the directory, brief description how to run the code, what is in the code, links to relevant papers, links to relevant githubs, etc...
+## medical_visualization_tool.ipynb
+- **Description**: Notebook that visualizes predictions from the model. This notebook has a variety of functions which provide the user with the ability to visualize a patients tumor prediction. It imports a model and then performs a layer by layer analysis of the respective MRI. It creates a video output of the MRI with prediction overlay, and it also can create output for the MATLAB program visualizer3D.m to proecss and visualize. 
 
-## INSTRUCTIONS for (re) naming the student's repository for the final project with one student:
-* Students need to use the following naming rules for the repository with their solutions: e6692-2024Spring-FinalProject-GroupID-UNI 
-(the first part "e6692-2024Spring-FinalProject" will probably be inherited from the assignment, so only UNI needs to be added) 
-* Initially, the system may give the repo a name which ends with a student's Github userid. 
-The student must change that name and replace it with the name requested in the point above (containing their UNI)
-* Good Example: e6692-2024Spring-FinalProject-GroupID-zz9999;   Bad example: e6692-2024Spring-FinalProject-ee6040-2024Spring-FinalProject-GroupID-zz9999.
-* This change can be done from the "Settings" tab which is located on the repo page.
+## model_dice_iou.ipynb
+- **Description**: Notebook calculates the performance evaluation metrics on the test data.
 
-## INSTRUCTIONS for naming the students' repository for the final project with more students. 
-(Students need to use a 4-letter groupID/teamID): 
-* Template: e6692-2024Spring-FinalProject-GroupID-UNI1-UNI2-UNI3. -> Example: e6692-2024Spring-FinalProject-MEME-zz9999-aa9999-aa0000.
+## seg_models.py
+- **Description**: Python script containing the UNet model implementation I replicated, and it also contains a copy of the implemntation from the reference paper. However the copy is unused.
+
+## training.ipynb
+- **Description**: Notebook that is able to train the U-Net models. It is able to load in previous models and continue the progress while recording the losses. Additionally it saves the best model based upon the lowest validation loss. 
+
+## visualizer3D.m
+- **Description**: MATLAB script for generating 3D visualizations of a tumor. It can create a 3D model to scroll through based upon a desired confidence level. Additionally it can create a video of the same isosurface. 
+
+## E6691.2024Spring.JWSS.report.jws2215.pdf
+- **Description**: Final Report
+  
+## Saved Models (Google Drive)
+- **Description**: Link to saved models on Google Drive.
+- **Link**: [Saved Models](https://drive.google.com/file/d/1FuDpOWiBS80hauSfiT39cOldma9NDcLW/view?usp=drive_link)
