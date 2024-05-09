@@ -9,11 +9,17 @@ This project presents a software demo called landmark_locator.py aimed at assist
 ## training_models.ipynb
 - **Description**: Trainings the RT-DETR and YOLOv8 models. It incorporates transfer learning by loading in pretrained weights from Ultralytics that were optimized on the 80 classes of COCO. The results of the training runs are stored in the folder runs/detect.
 
+## dataset.yaml
+- **Description**: Configuration file that contains the classes and paths for trianing the Ultralytics models on the nyc_landmarks dataset. 
+
 ## Pretrained models
 - **Description**: 'rtdetr-l.pt', 'yolov8l.pt', and 'yolov8n.pt' are all the Ultralytics pretrained weights that were used in the training_models workbook.
 
 ## landmark_videos
-- **Description**: Folder containing the screen captures recorded from testing the program landmark_locator.py at a variety of locations in Manhattan. The folder contains both vidoes, converted gifs, and notes taken from each location. 
+- **Description**: Folder containing the screen captures recorded from testing the program landmark_locator.py at a variety of locations in Manhattan. The folder contains both vidoes, converted gifs, and notes taken from each location.
+
+## runs
+- **Description**: Folder containing the trained models and their respective training metrics in a subfolder called detect. The folder predict contains visualizations of the convolutional layers from a prediction that was made.
 
 ## Legacy Code
 - **Description**: Contains code from the old repository, mainly the data_training.ipynb workbook and the llm_experiment.ipynb workbook. The process for scrapping the internet for images and combining the images into the nyc_landmarks dataset is handled by the data_training workbook. The LLM experiment was a failed attempt at trying to implement a small language model that could run locally and provide insights on NYC landmarks.
