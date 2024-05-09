@@ -21,6 +21,9 @@ This project presents a software demo called landmark_locator.py aimed at assist
 ## runs
 - **Description**: Folder containing the trained models and their respective training metrics in a subfolder called detect. The folder predict contains visualizations of the convolutional layers from a prediction that was made.
 
+## utils
+- **Description**: Folder containg useful functions, specifically the make_dataset_nyc_landamrks.py file. This Python script defines a function make_nyc_dataset that processes a dataset of NYC landmark images and corresponding annotations. It clears existing contents of specified training and validation folders, processes each image and annotation file, and copies them into their respective folders based on a given label dictionary and a specified fraction for the validation set.
+
 ## Legacy Code
 - **Description**: Contains code from the old repository, mainly the data_training.ipynb workbook and the llm_experiment.ipynb workbook. The process for scrapping the internet for images and combining the images into the nyc_landmarks dataset is handled by the data_training workbook. The LLM experiment was a failed attempt at trying to implement a small language model that could run locally and provide insights on NYC landmarks.
 
@@ -30,3 +33,7 @@ This project presents a software demo called landmark_locator.py aimed at assist
 ## nyc_landmarks dataset
 - **Description**: Link to created dataset
 - **Link**: [nyc_landamrks](https://www.kaggle.com/datasets/jws2215/nyc-landmarks-object-detection)
+
+## Compilation of landmark_vidoes
+- **Description**: Link to youtube channel
+- **Link**: [Youtube](https://www.youtube.com/@JohanWillemSchulzSweldens)
