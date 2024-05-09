@@ -36,4 +36,4 @@ This project presents a software demo called landmark_locator.py aimed at assist
 
 ## Compilation of landmark_vidoes
 - **Description**: Link to youtube channel
-- **Link**: [Youtube](https://www.youtube.com/@JohanWillemSchulzSweldens)
+- **Link**: [Youtube](https://www.youtube.com/watch?v=v--pA2hUmZs&ab_channel=JohanWillemSchulzSweldens)
