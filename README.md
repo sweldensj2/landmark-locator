@@ -2,33 +2,24 @@
 # E6692 Spring 2024: Final Project
 This project presents a software demo called landmark_locator.py aimed at assisting tourists in identifying famous New York City landmarks in real-time without the need for an internet connection. The program utilizes object detection to identify ten major landmarks and runs locally on edge devices. The project incorporates three different models for inference: RT-DETR-l, YOLOv8l, and YOLOv8n, each offering unique trade-offs between accuracy and throughput. The paper outlines the methodology used in training these models, highlighting challenges such as dataset collection, model selection, and evaluation metrics. Additionally, the results of the trained models are discussed, comparing them with metrics from reference papers and evaluating their performance in live testing scenarios across various locations in Manhattan. The study concludes with insights into the discrepancy between observed throughput metrics and those reported in the original paper, suggesting areas for further investigation and refinement of the models.
 
+## landmark_locator.py
+- **Description**: Runs the object detection models in inference mode. It supports three different modes: "detr" for RT-DETR model, "nano" for YOLO8n model, and "yolo" for YOLO8l model. The detected buildings are highlighted with bounding boxes on the video feed, along with their confidence scores. Each building is labeled with its name and confidence score, and the bounding boxes are color-coded to represent different buildings. Additionally, the program calculates and prints the average model inference time and the average processing time per frame. To interrupt the execution, the user can press the "q" key or click on the red box.
+
+## training_models.ipynb
+- **Description**: Trainings the RT-DETR and YOLOv8 models. It incorporates transfer learning by loading in pretrained weights from Ultralytics that were optimized on the 80 classes of COCO. The results of the training runs are stored in the folder runs/detect.
+
+## Pretrained models
+- **Description**: 'rtdetr-l.pt', 'yolov8l.pt', and 'yolov8n.pt' are all the Ultralytics pretrained weights that were used in the training_models workbook.
+
+## landmark_videos
+- **Description**: Folder containing the screen captures recorded from testing the program landmark_locator.py at a variety of locations in Manhattan. The folder contains both vidoes, converted gifs, and notes taken from each location. 
+
 ## Legacy Code
-- **Description**: Contains code from the old repository, mainly the display_data.ipynb which was an initiail effort. It used a smaller 3 channel RGB 2D dataset, but it demonstrated the feasiliblty of the project. 
+- **Description**: Contains code from the old repository, mainly the data_training.ipynb workbook and the llm_experiment.ipynb workbook. The process for scrapping the internet for images and combining the images into the nyc_landmarks dataset is handled by the data_training workbook. The LLM experiment was a failed attempt at trying to implement a small language model that could run locally and provide insights on NYC landmarks.
 
-## Results
-- **Description**: Folder containing uploaded results. The folder contains videos of prediction overlays of patients 10 and 15, the output data for MATLAB to process, and it contains images of the 3D visualizations from MATLAB of both patients 10 and 15. 
-
-## data_inspection.ipynb
-- **Description**: Notebook starting the dataset inspection. This file loads essential packages, defines paths, inspects data samples, and processes them into correct folders for training and validation. Additionally, it displays random 2D slices from each image type and prints unique values for segmentation and image modalities.
-
-## medical_visualization_tool.ipynb
-- **Description**: Notebook that visualizes predictions from the model. This notebook has a variety of functions which provide the user with the ability to visualize a patients tumor prediction. It imports a model and then performs a layer by layer analysis of the respective MRI. It creates a video output of the MRI with prediction overlay, and it also can create output for the MATLAB program visualizer3D.m to proecss and visualize. 
-
-## model_dice_iou.ipynb
-- **Description**: Notebook calculates the performance evaluation metrics on the test data.
-
-## seg_models.py
-- **Description**: Python script containing the UNet model implementation I replicated, and it also contains a copy of the implemntation from the reference paper. However the copy is unused.
-
-## training.ipynb
-- **Description**: Notebook that is able to train the U-Net models. It is able to load in previous models and continue the progress while recording the losses. Additionally it saves the best model based upon the lowest validation loss. 
-
-## visualizer3D.m
-- **Description**: MATLAB script for generating 3D visualizations of a tumor. It can create a 3D model to scroll through based upon a desired confidence level. Additionally it can create a video of the same isosurface. 
-
-## E6691.2024Spring.JWSS.report.jws2215.pdf
+## E6692.2024Spring.JWSS.report.jws2215.pdf
 - **Description**: Final Report
   
-## Saved Models (Google Drive)
-- **Description**: Link to saved models on Google Drive.
-- **Link**: [Saved Models](https://drive.google.com/file/d/1FuDpOWiBS80hauSfiT39cOldma9NDcLW/view?usp=drive_link)
+## nyc_landmarks dataset
+- **Description**: Link to created dataset
+- **Link**: [nyc_landamrks](https://www.kaggle.com/datasets/jws2215/nyc-landmarks-object-detection)
