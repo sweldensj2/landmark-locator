@@ -1,7 +1,6 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/UHGdSN-p)
 # E6692 Spring 2024: Final Project
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/ifbeTrPr)
-# e6691-2024Spring-project Project Files and Folders Overview
+This project presents a software demo called landmark_locator.py aimed at assisting tourists in identifying famous New York City landmarks in real-time without the need for an internet connection. The program utilizes object detection to identify ten major landmarks and runs locally on edge devices. The project incorporates three different models for inference: RT-DETR-l, YOLOv8l, and YOLOv8n, each offering unique trade-offs between accuracy and throughput. The paper outlines the methodology used in training these models, highlighting challenges such as dataset collection, model selection, and evaluation metrics. Additionally, the results of the trained models are discussed, comparing them with metrics from reference papers and evaluating their performance in live testing scenarios across various locations in Manhattan. The study concludes with insights into the discrepancy between observed throughput metrics and those reported in the original paper, suggesting areas for further investigation and refinement of the models.
 
 ## Legacy Code
 - **Description**: Contains code from the old repository, mainly the display_data.ipynb which was an initiail effort. It used a smaller 3 channel RGB 2D dataset, but it demonstrated the feasiliblty of the project. 
